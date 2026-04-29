@@ -672,6 +672,56 @@ tr.same-date-row td:first-child {
   gap: 12px;
 }
 
+.print-preview-dialog {
+  width: min(94vw, 980px);
+  max-height: 90vh;
+  padding: 0;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.print-preview-dialog::backdrop {
+  background: rgba(25, 27, 31, 0.42);
+}
+
+.print-preview-panel {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  max-height: 90vh;
+}
+
+.print-preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 2px solid var(--ink);
+  padding: 14px 16px;
+}
+
+.print-preview-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.print-preview-paper {
+  overflow: auto;
+  margin: 18px;
+  padding: 18px;
+  border: 2px solid var(--line);
+  background: #fff;
+}
+
+.print-preview-report {
+  display: block !important;
+}
+
+.print-preview-actions {
+  border-top: 2px solid var(--ink);
+  padding: 16px;
+}
+
 @media (max-width: 640px) {
   .dashboard-header {
     display: grid;
@@ -736,6 +786,30 @@ tr.same-date-row td:first-child {
 @media print {
   body {
     background: #fff;
+  }
+
+  body:has(#print-preview-dialog[open]) .app-shell > .screen,
+  body:has(#print-preview-dialog[open]) .detail-dialog,
+  body:has(#print-preview-dialog[open]) .print-preview-header,
+  body:has(#print-preview-dialog[open]) .print-preview-actions {
+    display: none !important;
+  }
+
+  body:has(#print-preview-dialog[open]) .print-preview-dialog,
+  body:has(#print-preview-dialog[open]) .print-preview-panel,
+  body:has(#print-preview-dialog[open]) .print-preview-paper {
+    display: block !important;
+    width: 100%;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    background: #fff;
+  }
+
+  body:has(#print-preview-dialog[open]) .print-preview-dialog {
+    position: static;
   }
 
   .screen,

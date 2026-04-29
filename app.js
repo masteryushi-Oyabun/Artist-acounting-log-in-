@@ -488,6 +488,23 @@ function savePeriodPaidStatus(event) {
   updateReports();
 }
 
+function openPrintPreview() {
+  const activeReport = document.querySelector(".report-view.active");
+  const previewContent = $("#print-preview-content");
+  const clonedReport = activeReport.cloneNode(true);
+
+  clonedReport.querySelectorAll(".print-actions").forEach((element) => element.remove());
+  clonedReport.querySelectorAll(".payout-control").forEach((element) => element.remove());
+  clonedReport.classList.add("print-preview-report");
+  previewContent.innerHTML = "";
+  previewContent.appendChild(clonedReport);
+  $("#print-preview-dialog").showModal();
+}
+
+function closePrintPreview() {
+  $("#print-preview-dialog").close();
+}
+
 function logIn() {
   const id = $("#user-id").value.trim();
   const password = $("#user-password").value;
@@ -534,7 +551,7 @@ document.querySelectorAll("[data-report-tab]").forEach((button) => {
 
 document.querySelectorAll("[data-print-view]").forEach((button) => {
   button.addEventListener("click", () => {
-    window.print();
+    openPrintPreview();
   });
 });
 
@@ -579,5 +596,13 @@ $("#period-paid-form").addEventListener("submit", savePeriodPaidStatus);
 $("#period-paid-cancel-button").addEventListener("click", closePeriodPaidDialog);
 
 $("#period-paid-back-button").addEventListener("click", closePeriodPaidDialog);
+
+$("#print-preview-close-button").addEventListener("click", closePrintPreview);
+
+$("#print-preview-back-button").addEventListener("click", closePrintPreview);
+
+$("#print-preview-print-button").addEventListener("click", () => {
+  window.print();
+});
 
 $("#user-id").focus();

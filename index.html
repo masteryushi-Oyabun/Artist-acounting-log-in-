@@ -221,6 +221,20 @@
           </form>
         </div>
       </dialog>
+
+      <dialog class="print-preview-dialog" id="print-preview-dialog">
+        <div class="print-preview-panel">
+          <header class="print-preview-header">
+            <h2>Print Preview</h2>
+            <button class="secondary-button icon-button" id="print-preview-close-button" type="button" aria-label="Close print preview">X</button>
+          </header>
+          <div class="print-preview-paper" id="print-preview-content"></div>
+          <div class="dialog-actions print-preview-actions">
+            <button class="secondary-button" id="print-preview-back-button" type="button">Close</button>
+            <button class="primary-button" id="print-preview-print-button" type="button">Print</button>
+          </div>
+        </div>
+      </dialog>
     </main>
 
     <script src="./app.js"></script>
